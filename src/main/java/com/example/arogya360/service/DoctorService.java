@@ -31,4 +31,8 @@ public class DoctorService {
     public void deleteDoctor(Long id) {
         doctorRepository.deleteById(id);
     }
+
+    public List<Doctor> searchDoctors(String name) {
+        return doctorRepository.findByNameContainingIgnoreCase(name);
+    }
 }

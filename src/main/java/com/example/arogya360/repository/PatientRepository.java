@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface PatientRepository extends JpaRepository<Patient , Long> {
 
     // Basic CRUD operations are automatically available
+    java.util.List<Patient> findByNameContainingIgnoreCase(String name);
 }

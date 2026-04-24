@@ -47,4 +47,10 @@ public class PatientController {
         patientService.deletePatient(id);
         return ResponseEntity.ok("Patient deleted successfully");
     }
+
+    // Search patient by name
+    @GetMapping("/search")
+    public ResponseEntity<List<Patient>> searchPatients(@RequestParam String name) {
+        return ResponseEntity.ok(patientService.searchPatients(name));
+    }
 }

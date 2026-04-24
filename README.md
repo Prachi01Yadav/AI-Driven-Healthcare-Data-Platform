@@ -1,104 +1,48 @@
-# Arogya360
+# Arogya360 - Hospital Management System
 
-Arogya360 is a full‑stack healthcare management platform designed to simplify hospital operations and enhance patient–doctor interaction. It provides modules for managing patients, doctors, prescriptions, and appointments through a unified digital interface.
+Arogya360 is a comprehensive Hospital Management System built with Spring Boot and a modern, responsive Vanilla JS frontend. It is designed to streamline the management of patients, doctors, appointments, bills, and prescriptions.
 
-## Features
+## Features Added in the Latest Upgrade
 
-- Patient management (create, view, update, delete)
-- Doctor management and profiles
-- Appointment scheduling and calendar view
-- Prescription creation, storage and retrieval
-- Basic user authentication and role-based access (Admin / Doctor / Patient) — adjust as implemented
-- Search and filters for patients/doctors/appointments
-- Export / reporting placeholders
+### Backend & AI Capabilities
+*   **Spring AI Integration:** Intelligent hospital assistant powered by OpenAI/Groq capable of answering hospital FAQs, standard medical queries, and checking doctor schedules.
+*   **Smart Medicine Suggestions:** AI-driven one-click medicine and protocol suggestions based on patient disease records.
+*   **Analytics Dashboard API:** A new `/dashboard/stats` endpoint aggregating vital data (total patients, doctors, appointments, and revenue) to provide a high-level overview.
+*   **Enhanced Doctor Model:** Doctors now have configurable `workingDays` and `workingHours` to calculate availability.
+*   **Enhanced Appointment Model:** Added an appointment `status` field (e.g., "SCHEDULED", "COMPLETED", "CANCELLED") for robust tracking.
+*   **Search Functionality:** Introduced powerful search endpoints (`/patients/search?name=...` and `/doctors/search?name=...`) for quick filtering.
 
+### Frontend
+*   **Professional Medical Aesthetic:** Transitioned to a clean, modern white-and-blue theme (`#ffffff` background, `#2563eb` accents) using a crisp typography stack (Inter/Segoe UI) to ensure a trustworthy, clinical appearance.
+*   **Dynamic Dashboard View:** A new default landing tab that visually displays high-level statistics and KPIs using responsive card layouts.
+*   **Interactive UI/UX:** Integrated smooth micro-animations, hover effects, and modern form controls for an elevated user experience.
 
----
+## Tech Stack
+*   **Backend:** Java 21, Spring Boot (Data JPA, Web), MySQL Connector
+*   **Frontend:** HTML5, CSS3 (Custom Variables, Flexbox/Grid), Vanilla JavaScript (ES6+ Fetch API)
+*   **Deployment:** Docker, Render
 
-## Language composition
+## How to Run Locally
 
-This repository is primarily implemented in:
-- Java — 76.9%
-- JavaScript — 14.0%
-- CSS — 5.8%
-- HTML — 3.3%
+### Prerequisites
+*   Java 21
+*   Maven
+*   MySQL Database (Running on localhost:3306)
 
+### Setup
+1.  **Configure Database:** Ensure MySQL is running. The application expects a database named `hospital_db` and credentials `root` / `Prachi0101_26` (which can be overridden via `DB_URL`, `DB_USERNAME`, `DB_PASSWORD` environment variables).
+2.  **Build and Run:**
+    ```bash
+    mvn clean install
+    mvn spring-boot:run
+    ```
+3.  **Access the Application:** Open your browser and navigate to `http://localhost:8081`.
 
-## Architecture & Tech Stack
-
-A typical stack for this project (adapt to actual choices in the repo):
-
-- Backend: Java (Spring Boot)
-- Frontend: JavaScript + HTML + CSS
-- Database: MySQL 
-- Build tools: Maven npm 
-
-## Prerequisites
-
-- Java 11+ (or Java 17+) installed and JAVA_HOME configured
-- Maven 
-- A relational database (MySQL) or a configured embedded DB
-- Git
-
----
-
-### Backend (Java) — build & run
-
-```bash
-# build
-mvn clean package
-
-# run
-mvn spring-boot:run
-# or
-java -jar target/<your-backend-artifact>.jar
-```
-
-### Database setup
-
-1. Create a database (MySQL):
-```sql
-CREATE DATABASE arogya360;
-CREATE USER 'arogya'@'localhost' IDENTIFIED BY 'change_me';
-GRANT ALL PRIVILEGES ON arogya360.* TO 'arogya'@'localhost';
-FLUSH PRIVILEGES;
-```
----
-
-## Configuration
-
-Application configuration should be stored in environment variables or config files (examples):
-
-- Spring-style properties (application.properties / application.yml)
-  - spring.datasource.url=jdbc:mysql://localhost:3306/arogya360
-  - spring.datasource.username=arogya
-  - spring.datasource.password=change_me
-  - server.port=8080
-
-- Or use environment variables:
-  - DATABASE_URL
-  - DATABASE_USER
-  - DATABASE_PASSWORD
-  - JWT_SECRET (if JWT auth is used)
-
-Provide a sample .env or application.properties.example in the repo for contributors.
-
----
-
-## Testing
-
-Run backend tests (Maven example):
-```bash
-mvn test
-```
-
-Run frontend tests (if present):
-```bash
-cd frontend
-npm test
-```
-
-
-
-
-
+## Deployment (Render)
+This project is configured for seamless deployment on **Render** using Docker.
+1.  Sign up for a free account on [Render](https://render.com).
+2.  Create a new **Web Service**.
+3.  Connect your GitHub repository containing Arogya360.
+4.  Render will automatically detect the `Dockerfile` and `render.yaml` configuration.
+5.  In the Render dashboard, define the environment variables (`DB_URL`, `DB_USERNAME`, `DB_PASSWORD`) pointing to your hosted MySQL instance (e.g., Aiven, PlanetScale, or a Render PostgreSQL database if migrating).
+6.  Click **Deploy**.

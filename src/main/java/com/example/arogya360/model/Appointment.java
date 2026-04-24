@@ -25,6 +25,9 @@ public class Appointment {
 
     private String remarks;
 
+    @Column(nullable = false)
+    private String status = "SCHEDULED"; // Default status
+
     public Appointment() {}
 
     public Appointment(Patient patient, Doctor doctor, LocalDateTime appointmentTime, String remarks) {
@@ -32,6 +35,7 @@ public class Appointment {
         this.doctor = doctor;
         this.appointmentTime = appointmentTime;
         this.remarks = remarks;
+        this.status = "SCHEDULED";
     }
 
     // Getters & Setters
@@ -50,4 +54,6 @@ public class Appointment {
     public String getRemarks() { return remarks; }
     public void setRemarks(String remarks) { this.remarks = remarks; }
 
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }

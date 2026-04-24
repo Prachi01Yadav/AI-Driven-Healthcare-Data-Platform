@@ -21,13 +21,18 @@ public class Doctor {
     private String phone;
     private int experience;
 
+    private String workingDays; // e.g. "Monday-Friday"
+    private String workingHours; // e.g. "09:00-17:00"
+
     public Doctor() {}
 
-    public Doctor(String name, String specialization,int experience, String phone) {
+    public Doctor(String name, String specialization,int experience, String phone, String workingDays, String workingHours) {
         this.name = name;
         this.specialization = specialization;
         this.experience=experience;
         this.phone = phone;
+        this.workingDays = workingDays != null ? workingDays : "Mon-Fri";
+        this.workingHours = workingHours != null ? workingHours : "09:00-17:00";
     }
 
     // Getters & Setters
@@ -46,4 +51,9 @@ public class Doctor {
     public String getPhone() { return phone; }
     public void setPhone(String phone) { this.phone = phone; }
 
+    public String getWorkingDays() { return workingDays; }
+    public void setWorkingDays(String workingDays) { this.workingDays = workingDays; }
+
+    public String getWorkingHours() { return workingHours; }
+    public void setWorkingHours(String workingHours) { this.workingHours = workingHours; }
 }

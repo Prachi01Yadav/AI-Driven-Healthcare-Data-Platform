@@ -50,10 +50,15 @@ public ResponseEntity<Doctor> updateDoctor(@PathVariable Long id, @RequestBody D
     existingDoctor.setSpecialization(doctorDetails.getSpecialization());
     existingDoctor.setExperience(doctorDetails.getExperience());
     existingDoctor.setPhone(doctorDetails.getPhone());
+    if (doctorDetails.getWorkingDays() != null) existingDoctor.setWorkingDays(doctorDetails.getWorkingDays());
+    if (doctorDetails.getWorkingHours() != null) existingDoctor.setWorkingHours(doctorDetails.getWorkingHours());
 
     Doctor updatedDoctor = doctorService.saveDoctor(existingDoctor);
     return ResponseEntity.ok(updatedDoctor);
 }
 
-
+    @GetMapping("/search")
+    public ResponseEntity<List<Doctor>> searchDoctors(@RequestParam String name) {
+        return ResponseEntity.ok(doctorService.searchDoctors(name));
+    }
 }
