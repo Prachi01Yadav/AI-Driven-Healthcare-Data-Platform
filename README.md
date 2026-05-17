@@ -1,6 +1,6 @@
-# Arogya360 - Hospital Management System
+# AI-Driven Healthcare Data Platform
 
-Arogya360 is a comprehensive Hospital Management System built with Spring Boot and a modern, responsive Vanilla JS frontend. It is designed to streamline the management of patients, doctors, appointments, bills, and prescriptions.
+A a comprehensive Hospital Management System built with Spring Boot and a modern, responsive Vanilla JS frontend. It is designed to streamline the management of patients, doctors, appointments, bills, and prescriptions.
 
 ## Features Added in the Latest Upgrade
 
