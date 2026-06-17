@@ -21,6 +21,14 @@ public class Bill {
 
     private String remarks;
 
+    @Column(nullable = false)
+    private String paymentStatus = "PENDING"; // PENDING, PAID, OVERDUE, CANCELLED
+
+    private String paymentMethod; // CASH, CARD, UPI, INSURANCE
+
+    private String insuranceProvider;
+    private String insurancePolicyNumber;
+
     public Bill() {}
 
     public Bill(Appointment appointment, double amount, LocalDateTime billingDate, String remarks) {
@@ -45,4 +53,16 @@ public class Bill {
 
     public String getRemarks() { return remarks; }
     public void setRemarks(String remarks) { this.remarks = remarks; }
+
+    public String getPaymentStatus() { return paymentStatus; }
+    public void setPaymentStatus(String paymentStatus) { this.paymentStatus = paymentStatus; }
+
+    public String getPaymentMethod() { return paymentMethod; }
+    public void setPaymentMethod(String paymentMethod) { this.paymentMethod = paymentMethod; }
+
+    public String getInsuranceProvider() { return insuranceProvider; }
+    public void setInsuranceProvider(String insuranceProvider) { this.insuranceProvider = insuranceProvider; }
+
+    public String getInsurancePolicyNumber() { return insurancePolicyNumber; }
+    public void setInsurancePolicyNumber(String insurancePolicyNumber) { this.insurancePolicyNumber = insurancePolicyNumber; }
 }

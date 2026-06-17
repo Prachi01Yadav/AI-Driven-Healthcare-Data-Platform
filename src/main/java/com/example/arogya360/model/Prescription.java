@@ -39,6 +39,16 @@ public class Prescription {
     @NotNull(message = "Prescription date is required")
     private LocalDate date;
 
+    // E-Prescription fields
+    @Column(length = 5000)
+    private String qrCodeData;
+
+    private String digitalSignature;
+    private String verificationHash;
+
+    @Column(nullable = false)
+    private String status = "ACTIVE"; // ACTIVE, EXPIRED, DISPENSED
+
     // Constructors
     public Prescription() {}
 
@@ -72,4 +82,16 @@ public class Prescription {
 
     public LocalDate getDate() { return date; }
     public void setDate(LocalDate date) { this.date = date; }
+
+    public String getQrCodeData() { return qrCodeData; }
+    public void setQrCodeData(String qrCodeData) { this.qrCodeData = qrCodeData; }
+
+    public String getDigitalSignature() { return digitalSignature; }
+    public void setDigitalSignature(String digitalSignature) { this.digitalSignature = digitalSignature; }
+
+    public String getVerificationHash() { return verificationHash; }
+    public void setVerificationHash(String verificationHash) { this.verificationHash = verificationHash; }
+
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }

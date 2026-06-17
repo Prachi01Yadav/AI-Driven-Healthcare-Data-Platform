@@ -7,12 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
-
 @RestController
 @RequestMapping("/patients")
-
-
 public class PatientController {
 
    private final PatientService patientService;
@@ -38,6 +34,14 @@ public class PatientController {
     public ResponseEntity<Patient> getPatientById(@PathVariable Long id) {
         Patient patient = patientService.getPatientById(id);
         if (patient != null) return ResponseEntity.ok(patient);
+        else return ResponseEntity.notFound().build();
+    }
+
+    // Update patient
+    @PutMapping("/{id}")
+    public ResponseEntity<Patient> updatePatient(@PathVariable Long id, @RequestBody Patient patientDetails) {
+        Patient updated = patientService.updatePatient(id, patientDetails);
+        if (updated != null) return ResponseEntity.ok(updated);
         else return ResponseEntity.notFound().build();
     }
 

@@ -6,8 +6,14 @@ services:
     branch: main
     envVars:
       - key: DB_URL
-        value: jdbc:mysql://your-mysql-host:3306/hospital_db
+        value: jdbc:postgresql://dpg-d8pg02rsq97s7382eh40-a.oregon-postgres.render.com:5432/hospital_db
       - key: DB_USERNAME
-        value: root
+        value: hospital_user
       - key: DB_PASSWORD
-        value: your-password
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: PORT
+        value: 8081

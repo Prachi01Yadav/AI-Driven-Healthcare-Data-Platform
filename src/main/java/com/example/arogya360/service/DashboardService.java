@@ -16,15 +16,21 @@ public class DashboardService {
     private final DoctorRepository doctorRepository;
     private final AppointmentRepository appointmentRepository;
     private final BillRepository billRepository;
+    private final PatientService patientService;
+    private final AppointmentService appointmentService;
 
     public DashboardService(PatientRepository patientRepository,
                             DoctorRepository doctorRepository,
                             AppointmentRepository appointmentRepository,
-                            BillRepository billRepository) {
+                            BillRepository billRepository,
+                            PatientService patientService,
+                            AppointmentService appointmentService) {
         this.patientRepository = patientRepository;
         this.doctorRepository = doctorRepository;
         this.appointmentRepository = appointmentRepository;
         this.billRepository = billRepository;
+        this.patientService = patientService;
+        this.appointmentService = appointmentService;
     }
 
     public Map<String, Object> getDashboardStats() {
@@ -34,11 +40,24 @@ public class DashboardService {
         stats.put("totalAppointments", appointmentRepository.count());
         stats.put("totalBills", billRepository.count());
 
-        // Could also sum up the total revenue from bills
+        // Revenue
         double totalRevenue = billRepository.findAll().stream()
                 .mapToDouble(bill -> bill.getAmount())
                 .sum();
         stats.put("totalRevenue", totalRevenue);
+
+        // Appointment status breakdown
+        stats.put("scheduledAppointments", appointmentRepository.countByStatus("SCHEDULED"));
+        stats.put("completedAppointments", appointmentRepository.countByStatus("COMPLETED"));
+        stats.put("cancelledAppointments", appointmentRepository.countByStatus("CANCELLED"));
+
+        // Bill payment breakdown
+        stats.put("pendingBills", billRepository.countByPaymentStatus("PENDING"));
+        stats.put("paidBills", billRepository.countByPaymentStatus("PAID"));
+
+        // Recent data
+        stats.put("recentPatients", patientService.getRecentPatients());
+        stats.put("recentAppointments", appointmentService.getRecentAppointments());
 
         return stats;
     }

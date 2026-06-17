@@ -30,4 +30,18 @@ public class AppointmentService {
         appointmentRepository.deleteById(id);
     }
 
+    public Appointment updateAppointmentStatus(Long id, String status) {
+        Appointment appointment = appointmentRepository.findById(id).orElse(null);
+        if (appointment == null) return null;
+        appointment.setStatus(status);
+        return appointmentRepository.save(appointment);
+    }
+
+    public List<Appointment> getRecentAppointments() {
+        return appointmentRepository.findTop5ByOrderByAppointmentTimeDesc();
+    }
+
+    public long countByStatus(String status) {
+        return appointmentRepository.countByStatus(status);
+    }
 }

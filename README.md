@@ -1,48 +1,60 @@
-# AI-Driven Healthcare Data Platform
+# Arogya 360 - AI-Driven Healthcare Management Platform
 
-A a comprehensive Hospital Management System built with Spring Boot and a modern, responsive Vanilla JS frontend. It is designed to streamline the management of patients, doctors, appointments, bills, and prescriptions.
+Arogya 360 is a comprehensive, AI-powered hospital management system designed to streamline patient records, appointments, digital prescriptions, emergency SOS routing, and blockchain-based audit trails.
 
-## Features Added in the Latest Upgrade
+## Core Features
 
-### Backend & AI Capabilities
-*   **Spring AI Integration:** Intelligent hospital assistant powered by OpenAI/Groq capable of answering hospital FAQs, standard medical queries, and checking doctor schedules.
-*   **Smart Medicine Suggestions:** AI-driven one-click medicine and protocol suggestions based on patient disease records.
-*   **Analytics Dashboard API:** A new `/dashboard/stats` endpoint aggregating vital data (total patients, doctors, appointments, and revenue) to provide a high-level overview.
-*   **Enhanced Doctor Model:** Doctors now have configurable `workingDays` and `workingHours` to calculate availability.
-*   **Enhanced Appointment Model:** Added an appointment `status` field (e.g., "SCHEDULED", "COMPLETED", "CANCELLED") for robust tracking.
-*   **Search Functionality:** Introduced powerful search endpoints (`/patients/search?name=...` and `/doctors/search?name=...`) for quick filtering.
+- **Patient Management:** Track patient vitals, demographics, and medical history.
+- **AI Health Risk Scoring:** Algorithmic calculation of patient health risk levels based on vitals, returning actionable recommendations.
+- **AI Assistant:** Integration with Groq/Llama3 to provide real-time AI responses to hospital FAQs and basic medical protocol guidance.
+- **E-Prescriptions:** Digital prescriptions with secure QR codes, cryptographic hashing, and dispensing workflows.
+- **Blockchain Medical Records:** Tamper-proof, cryptographically secure (SHA-256) append-only ledger for all critical patient interactions.
+- **Emergency SOS & Ambulance Dispatch:** GPS-based nearest ambulance routing using Haversine distance calculations.
+- **Real-Time Notifications:** WebSocket (STOMP) integration for instant alerts.
+- **Role-Based Access Control:** Secure JWT authentication for Admins, Doctors, and Patients.
+- **Bilingual Interface:** Support for English and Hindi interfaces.
 
-### Frontend
-*   **Professional Medical Aesthetic:** Transitioned to a clean, modern white-and-blue theme (`#ffffff` background, `#2563eb` accents) using a crisp typography stack (Inter/Segoe UI) to ensure a trustworthy, clinical appearance.
-*   **Dynamic Dashboard View:** A new default landing tab that visually displays high-level statistics and KPIs using responsive card layouts.
-*   **Interactive UI/UX:** Integrated smooth micro-animations, hover effects, and modern form controls for an elevated user experience.
+## Technology Stack
 
-## Tech Stack
-*   **Backend:** Java 21, Spring Boot (Data JPA, Web), MySQL Connector
-*   **Frontend:** HTML5, CSS3 (Custom Variables, Flexbox/Grid), Vanilla JavaScript (ES6+ Fetch API)
-*   **Deployment:** Docker, Render
+- **Backend:** Java, Spring Boot 3.5, Spring Security, Spring AI, WebSockets, JWT, ZXing (QR generation)
+- **Database:** PostgreSQL
+- **Frontend:** Vanilla HTML, CSS, JavaScript (Zero dependencies), Chart.js
+- **Deployment:** Docker, Render
 
-## How to Run Locally
+## Environment Setup
 
-### Prerequisites
-*   Java 21
-*   Maven
-*   MySQL Database (Running on localhost:3306)
+To run the application locally or in production, configure the following environment variables:
 
-### Setup
-1.  **Configure Database:** Ensure MySQL is running. The application expects a database named `hospital_db` and credentials `root` / `Prachi0101_26` (which can be overridden via `DB_URL`, `DB_USERNAME`, `DB_PASSWORD` environment variables).
-2.  **Build and Run:**
-    ```bash
-    mvn clean install
-    mvn spring-boot:run
-    ```
-3.  **Access the Application:** Open your browser and navigate to `http://localhost:8081`.
+- \`DB_URL\`: PostgreSQL connection string (default: jdbc:postgresql://localhost:5432/hospital_db)
+- \`DB_USERNAME\`: Database username (default: postgres)
+- \`DB_PASSWORD\`: Database password (default: postgres)
+- \`GROQ_API_KEY\`: Groq API key for the AI assistant (default: disabled)
+- \`JWT_SECRET\`: A secure 256-bit base64 secret string for signing JWT tokens.
+- \`PORT\`: Application port (default: 8081)
 
-## Deployment (Render)
-This project is configured for seamless deployment on **Render** using Docker.
-1.  Sign up for a free account on [Render](https://render.com).
-2.  Create a new **Web Service**.
-3.  Connect your GitHub repository containing Arogya360.
-4.  Render will automatically detect the `Dockerfile` and `render.yaml` configuration.
-5.  In the Render dashboard, define the environment variables (`DB_URL`, `DB_USERNAME`, `DB_PASSWORD`) pointing to your hosted MySQL instance (e.g., Aiven, PlanetScale, or a Render PostgreSQL database if migrating).
-6.  Click **Deploy**.
+## Running Locally
+
+1. Ensure PostgreSQL is running and a database named \`hospital_db\` exists.
+2. Build the application: \`mvn clean package\`
+3. Run the application: \`java -jar target/Arogya360-0.0.1-SNAPSHOT.jar\`
+4. Access the web interface at \`http://localhost:8081\`
+
+Note: On the first startup, a demo admin account will be automatically created:
+- Username: admin
+- Password: admin123
+
+## Deployment
+
+This project includes a \`Dockerfile\` and \`render.yaml\` optimized for deployment on Render.
+Simply connect the repository to Render, provision a PostgreSQL database, and supply the environment variables listed above.
+
+## API Endpoints Overview
+
+- \`/api/auth/**\`: Registration, Login, Profile
+- \`/patients/**\`: CRUD operations for Patients
+- \`/doctors/**\`: CRUD operations for Doctors
+- \`/appointments/**\`: Appointment scheduling and status updates
+- \`/api/blockchain/**\`: Block addition and chain verification
+- \`/api/health-risk/**\`: Health risk calculation
+- \`/api/e-prescription/**\`: QR generation and verification
+- \`/api/emergency/**\`: SOS dispatch and ambulance tracking

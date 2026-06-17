@@ -1,12 +1,12 @@
 package com.example.arogya360.controller;
 
-
 import com.example.arogya360.model.Appointment;
 import com.example.arogya360.service.AppointmentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/appointments")
@@ -43,5 +43,17 @@ public class AppointmentController {
     public ResponseEntity<String> deleteAppointment(@PathVariable Long id) {
         appointmentService.deleteAppointment(id);
         return ResponseEntity.ok("Appointment deleted successfully");
+    }
+
+    // Update appointment status
+    @PutMapping("/{id}/status")
+    public ResponseEntity<Appointment> updateAppointmentStatus(@PathVariable Long id, @RequestBody Map<String, String> body) {
+        String status = body.get("status");
+        if (status == null || status.trim().isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+        Appointment updated = appointmentService.updateAppointmentStatus(id, status);
+        if (updated != null) return ResponseEntity.ok(updated);
+        else return ResponseEntity.notFound().build();
     }
 }
