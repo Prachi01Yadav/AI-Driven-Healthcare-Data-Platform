@@ -21,16 +21,7 @@ Arogya 360 is a comprehensive, AI-powered hospital management system designed to
 - **Frontend:** Vanilla HTML, CSS, JavaScript (Zero dependencies), Chart.js
 - **Deployment:** Docker, Render
 
-## Environment Setup
 
-To run the application locally or in production, configure the following environment variables:
-
-- \`DB_URL\`: PostgreSQL connection string (default: jdbc:postgresql://localhost:5432/hospital_db)
-- \`DB_USERNAME\`: Database username (default: postgres)
-- \`DB_PASSWORD\`: Database password (default: postgres)
-- \`GROQ_API_KEY\`: Groq API key for the AI assistant (default: disabled)
-- \`JWT_SECRET\`: A secure 256-bit base64 secret string for signing JWT tokens.
-- \`PORT\`: Application port (default: 8081)
 
 ## Running Locally
 
