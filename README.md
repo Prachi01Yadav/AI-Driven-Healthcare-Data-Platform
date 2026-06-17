@@ -17,19 +17,19 @@ graph TD
         WS_Client[SockJS/STOMP]
     end
 
-    subgraph Backend - Spring Boot
+    subgraph Backend_Spring_Boot [Backend - Spring Boot]
         Security[Spring Security & JWT Filter]
         Controllers[REST Controllers]
         Services[Business Logic Services]
         
-        subgraph Core Modules
+        subgraph Core_Modules [Core Modules]
             Auth[Auth & User Mgmt]
             Vitals[Patient Vitals & History]
             Appt[Appointments]
             Billing[Bills & Payments]
         end
 
-        subgraph Advanced Modules
+        subgraph Advanced_Modules [Advanced Modules]
             Blockchain[Blockchain Audit Service]
             AI[Groq AI Assistant Service]
             EPres[E-Prescription & ZXing]
@@ -38,7 +38,7 @@ graph TD
         end
     end
 
-    subgraph External Services
+    subgraph External_Services [External Services]
         Groq[Groq Llama-3 API]
     end
 
@@ -50,12 +50,12 @@ graph TD
     WS_Client <-->|WebSockets| Notif
     Security --> Controllers
     Controllers --> Services
-    Services --> Core Modules
-    Services --> Advanced Modules
+    Services --> Core_Modules
+    Services --> Advanced_Modules
     
     AI -->|LLM Prompts| Groq
-    Advanced Modules --> Postgres
-    Core Modules --> Postgres
+    Advanced_Modules --> Postgres
+    Core_Modules --> Postgres
 ```
 
 ---
